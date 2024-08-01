@@ -4,20 +4,20 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.mockito.Mockito;
-
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 @RunWith(Parameterized.class)
 public class LionSexTest {
 
-    private static final String MALE = "Самец";
-    private static final String FEMALE = "Самка";
-    private static final String UNKNOWN = "unknown";
+    public static final String MALE = "Самец";
+    public static final String FEMALE = "Самка";
+    public static final String UNKNOWN = "unknown";
     private final boolean expected;
     private final String sex;
+    private Lion lion;
 
     Feline feline = Mockito.mock(Feline.class);
-
 
     public LionSexTest(String sex, boolean hasMane) {
         this.sex = sex;
@@ -33,14 +33,22 @@ public class LionSexTest {
         };
     }
 
+
     @Test
     public void testLionSex() throws Exception {
-        try {
-            Lion lion = new Lion(sex, feline);
+        if ("unknown".equals(sex)) {
+            Exception exception = null;
+            try {
+                lion = new Lion(sex, feline);
+            } catch (Exception e) {
+                exception = e;
+            }
+            assertNotNull("Ожидалось исключение, но оно не было выброшено.", exception);
+            assertEquals("Используйте допустимые значения пола животного - самец или самка", exception.getMessage());
+        } else {
+            lion = new Lion(sex, feline);
             boolean actual = lion.doesHaveMane();
             assertEquals(expected, actual);
-        } catch (Exception e) {
-            System.out.println("Произошло исключение");
         }
     }
 

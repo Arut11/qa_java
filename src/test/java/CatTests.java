@@ -30,15 +30,11 @@ public class CatTests {
 
     @Test
     public void testGetFood() throws Exception {
-
-        try {
             List<String> expected = List.of("Животные", "Птицы", "Рыба");
             Mockito.when(feline.eatMeat()).thenReturn(expected);
             List<String> actual = cat.getFood();
             assertEquals(expected, actual);
-        } catch (Exception e) {
-            System.out.println("Произошло исключение");
-        }
+
     }
 
 }

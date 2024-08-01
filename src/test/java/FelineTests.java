@@ -19,12 +19,9 @@ public class FelineTests {
     public void testEatMeat() throws Exception {
         List<String> expected = List.of("Животные", "Птицы", "Рыба");
         Mockito.when(feline.getFood("Хищник")).thenReturn(expected);
-        try {
-            List<String> actual = feline.eatMeat();
-            assertEquals(expected, actual);
-        } catch (Exception e) {
-            System.out.println("Произошло исключение");
-        }
+        List<String> actual = feline.eatMeat();
+        assertEquals(expected, actual);
+
 
     }
 

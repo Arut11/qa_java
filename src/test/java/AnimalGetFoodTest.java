@@ -4,15 +4,16 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 @RunWith(Parameterized.class)
 public class AnimalGetFoodTest {
 
-    private static final String HERBIVORE = "Травоядное";
-    private static final String PREDATOR = "Хищник";
-    private static final String UNKNOWN = "unknown";
-    private static final List<String> EXPECTED_HERBIVORE = List.of("Трава", "Различные растения");
-    private static final List<String> EXPECTED_PREDATOR = List.of("Животные", "Птицы", "Рыба");
+    public static final String HERBIVORE = "Травоядное";
+    public static final String PREDATOR = "Хищник";
+    public static final String UNKNOWN = "unknown";
+    public static final List<String> EXPECTED_HERBIVORE = List.of("Трава", "Различные растения");
+    public static final List<String> EXPECTED_PREDATOR = List.of("Животные", "Птицы", "Рыба");
     private final String animalKind;
     private final List<String> expected;
 
@@ -36,16 +37,22 @@ public class AnimalGetFoodTest {
 
     @Test
     public void testLionSex() throws Exception {
-
+        if ("unknown".equals(animalKind)) {
+            Exception exception = null;
             try {
-                List<String> actual = animal.getFood(animalKind);
-                assertEquals(expected, actual);
+                animal.getFood(animalKind);
             } catch (Exception e) {
-                System.out.println("Произошло исключение");
+                exception = e;
             }
+            assertNotNull("Ожидалось исключение, но оно не было выброшено.", exception);
+            assertEquals("Неизвестный вид животного, используйте значение Травоядное или Хищник", exception.getMessage());
+        } else {
+            List<String> actual = animal.getFood(animalKind);
+            assertEquals(expected, actual);
         }
-
     }
+
+}
 
 
 
