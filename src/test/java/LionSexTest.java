@@ -4,6 +4,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.mockito.Mockito;
+
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -15,7 +18,6 @@ public class LionSexTest {
     public static final String UNKNOWN = "unknown";
     private final boolean expected;
     private final String sex;
-    private Lion lion;
 
     Feline feline = Mockito.mock(Feline.class);
 
@@ -36,10 +38,11 @@ public class LionSexTest {
 
     @Test
     public void testLionSex() throws Exception {
+        Lion lion;
         if ("unknown".equals(sex)) {
             Exception exception = null;
             try {
-                lion = new Lion(sex, feline);
+                new Lion(sex, feline);
             } catch (Exception e) {
                 exception = e;
             }

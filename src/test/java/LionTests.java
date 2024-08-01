@@ -22,7 +22,7 @@ public class LionTests {
     }
 
     @Test
-    public void testGetKittens() throws Exception {
+    public void testGetKittens() {
         int expected = 1;
         Mockito.when(feline.getKittens()).thenReturn(expected);
         int actual = lion.getKittens();
