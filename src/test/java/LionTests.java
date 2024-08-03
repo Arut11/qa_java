@@ -7,6 +7,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class LionTests {
 
@@ -36,5 +37,17 @@ public class LionTests {
         Mockito.when(feline.getFood("Хищник")).thenReturn(expected);
         List<String> actual = lion.getFood();
         assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testLionException() {
+        Exception exception = null;
+        try {
+            new Lion("unknown", feline);
+        } catch (Exception e) {
+            exception = e;
+        }
+        assertNotNull("Ожидалось исключение, но оно не было выброшено.", exception);
+        assertEquals("Используйте допустимые значения пола животного - самец или самка", exception.getMessage());
     }
 }

@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 public class FelineTests {
 
     @Spy
-    Feline feline;
+    private Feline feline;
 
 
     @Test

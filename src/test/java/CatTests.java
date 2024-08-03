@@ -13,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 public class CatTests {
 
     @Mock
-    Feline feline;
+    private Feline feline;
 
     private Cat cat;
 
